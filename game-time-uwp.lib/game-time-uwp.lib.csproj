@@ -108,7 +108,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="Converters\BooleanVisibilityConverter.cs" />
+    <Compile Include="Converters\SymbolToColorConverter.cs" />
+    <Compile Include="Extensions\EnumExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sync\SaveStatus.cs" />
+    <Compile Include="Sync\SyncStatus.cs" />
+    <Compile Include="ViewModels\DesignTime\MenuDesignViewModel.cs" />
+    <Compile Include="ViewModels\DesignTime\MenuItemDesignViewModel.cs" />
+    <Compile Include="ViewModels\IMenuViewModel.cs" />
+    <Compile Include="ViewModels\Properties\IMenuItemViewModel.cs" />
     <EmbeddedResource Include="Properties\game_time_uwp.lib.rd.xml" />
   </ItemGroup>
   <ItemGroup>
@@ -117,6 +126,7 @@
       <Name>game-time-uwp.models</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

@@ -1,0 +1,124 @@
+﻿<UserControl
+    x:Class="game_time_uwp.Views.MenuView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:prismMvvm="using:Prism.Windows.Mvvm"
+    prismMvvm:ViewModelLocator.AutoWireViewModel="True"
+    xmlns:localConverts="using:game_time_uwp.lib.Converters"
+    xmlns:designData="using:game_time_uwp.lib.ViewModels.DesignTime"
+    d:DataContext="{d:DesignInstance designData:MenuDesignViewModel, d:IsDesignTimeCreatable=True}"
+    mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <localConverts:SymbolToColorConverter x:Key="SymbolToColorConverter"></localConverts:SymbolToColorConverter>
+        <localConverts:BooleanVisibilityConverter x:Key="BooleanVisibilityConverter"></localConverts:BooleanVisibilityConverter>
+    </UserControl.Resources>
+
+    <Grid Background="{ThemeResource ApplicationMenuBackgroundThemeBrush}">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="MenuStates">
+                <VisualState x:Name="Wide">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="1280" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="menuItemsControl.Margin" Value="0" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Medium">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="800" />
+                    </VisualState.StateTriggers>
+                </VisualState>
+                <VisualState x:Name="Narrow" />
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <ItemsControl Grid.Row="0"
+                      Margin="0,48,0,0"
+                      IsTabStop="False"
+                      ItemsSource="{Binding Commands}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Button AutomationProperties.Name="{Binding DisplayName}"
+                                Command="{Binding Command}"
+                                Style="{StaticResource SplitViewMenuButtonStyle}"
+                                ToolTipService.ToolTip="{Binding DisplayName}">
+                            <StackPanel Orientation="Horizontal">
+                                <FontIcon Glyph="{Binding FontIcon}" Style="{StaticResource SplitViewMenuFontIconStyle}" />
+                                <TextBlock AutomationProperties.AccessibilityView="Raw"
+                                           Style="{StaticResource SplitViewMenuItemTextStyle}"
+                                           Text="{Binding DisplayName}" />
+                            </StackPanel>
+                        </Button>
+                    </Grid>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
+        <Button Grid.Row="1"
+                Visibility="{Binding IsSaveVisible, Converter={StaticResource BooleanVisibilityConverter}}"
+                AutomationProperties.Name="{Binding SaveStatusText}"
+                Command="{Binding SaveCommand}"
+                Style="{StaticResource SplitViewMenuButtonStyle}"
+                ToolTipService.ToolTip="{Binding SaveStatusText}">
+            <StackPanel Orientation="Horizontal">
+                <SymbolIcon Symbol="{Binding SaveSymbol}" Style="{StaticResource SplitViewMenuSymbolIconStyle}">
+                    <SymbolIcon.RenderTransform>
+                        <RotateTransform x:Name="SaveIconRotate" CenterX="10" CenterY="10" />
+                    </SymbolIcon.RenderTransform>
+                    <SymbolIcon.Resources>
+                        <Storyboard x:Name="SaveIconAnimation">
+                            <DoubleAnimation Storyboard.TargetName="SaveIconRotate" 
+                            Storyboard.TargetProperty="Angle"
+                            From="0"
+                            To="360"
+                            Duration="0:0:1.5"
+                            RepeatBehavior="Forever"/>
+                        </Storyboard>
+                    </SymbolIcon.Resources>
+                </SymbolIcon>
+                <TextBlock AutomationProperties.AccessibilityView="Raw"
+                                   Style="{StaticResource SplitViewMenuItemTextStyle}"
+                                    Foreground="{Binding SaveSymbol, Converter={StaticResource SymbolToColorConverter}, Mode=OneWay}"
+                                   Text="{Binding SaveStatusText}" />
+            </StackPanel>
+        </Button>
+
+        <Button Grid.Row="2" AutomationProperties.Name="{Binding SyncStatusText}"
+                        Command="{Binding SyncCommand}"
+                        Style="{StaticResource SplitViewMenuButtonStyle}"
+                        ToolTipService.ToolTip="{Binding SyncStatusText}">
+            <StackPanel Orientation="Horizontal">
+                <SymbolIcon Symbol="{Binding SyncSymbol}" Style="{StaticResource SplitViewMenuSymbolIconStyle}">
+                    <SymbolIcon.RenderTransform>
+                        <RotateTransform x:Name="SyncIconRotate" CenterX="10" CenterY="10" />
+                    </SymbolIcon.RenderTransform>
+                    <SymbolIcon.Resources>
+                        <Storyboard x:Name="SyncIconAnimation">
+                            <DoubleAnimation Storyboard.TargetName="SyncIconRotate" 
+                            Storyboard.TargetProperty="Angle"
+                            From="0"
+                            To="360"
+                            Duration="0:0:1.5"
+                            RepeatBehavior="Forever"/>
+                        </Storyboard>
+                    </SymbolIcon.Resources>
+                </SymbolIcon>
+                <TextBlock AutomationProperties.AccessibilityView="Raw"
+                                   Style="{StaticResource SplitViewMenuItemTextStyle}"
+                                    Foreground="{Binding SyncSymbol, Converter={StaticResource SymbolToColorConverter}, Mode=OneWay}"
+                                   Text="{Binding SyncStatusText}" />
+            </StackPanel>
+        </Button>
+    </Grid>
+</UserControl>
