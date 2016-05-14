@@ -2,6 +2,7 @@
 using System.Windows.Input;
 using game_time_uwp.models;
 using game_time_uwp.models.Game;
+using Prism.Commands;
 
 namespace game_time_uwp.lib.ViewModels.DesignTime
 {
@@ -21,6 +22,9 @@ namespace game_time_uwp.lib.ViewModels.DesignTime
                 new TemplateRosterDto {Id = "1", Name = "RHP w/ DH"},
                 new TemplateRosterDto {Id = "1", Name = "LHP w/ DH"}
             };
+
+            NewGameCommand = new DelegateCommand(OnNewGame);
+            GameSelectedCommand = new DelegateCommand(OnGameSelected);
         }
 
         public ObservableCollection<GameListItem> Games { get; }
@@ -34,5 +38,9 @@ namespace game_time_uwp.lib.ViewModels.DesignTime
         public ObservableCollection<TemplateRosterDto> RosterTemplates { get; }
 
         public TemplateRosterDto SelectedRosterTemplate => RosterTemplates[0];
+
+        private void OnNewGame() { }
+
+        private void OnGameSelected() { }
     }
 }

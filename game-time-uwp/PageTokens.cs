@@ -8,6 +8,6 @@ namespace game_time_uwp
 {
     public static class PageTokens
     {
-        public const string Home = nameof(Home);
+        public const string List = nameof(List);
     }
 }

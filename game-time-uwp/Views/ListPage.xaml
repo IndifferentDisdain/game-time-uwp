@@ -6,6 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:mvvm="using:Prism.Windows.Mvvm"
     xmlns:designTime="using:game_time_uwp.lib.ViewModels.DesignTime"
+    mvvm:ViewModelLocator.AutoWireViewModel="True"
     d:DataContext="{d:DesignInstance designTime:ListPageDesignViewModel, d:IsDesignTimeCreatable=True}"
     mc:Ignorable="d">
 

@@ -3,12 +3,13 @@ using System.Windows.Input;
 using Windows.UI.Xaml.Controls;
 using game_time_uwp.lib.Sync;
 using game_time_uwp.lib.ViewModels.Properties;
+using Prism.Commands;
 
 namespace game_time_uwp.lib.ViewModels.DesignTime
 {
-    public class MenuDesignViewModel : IMenuViewModel
+    public class MenuViewDesignViewModel : IMenuViewModel
     {
-        public MenuDesignViewModel()
+        public MenuViewDesignViewModel()
         {
             Commands = new ObservableCollection<IMenuItemViewModel>
             {
@@ -18,6 +19,9 @@ namespace game_time_uwp.lib.ViewModels.DesignTime
                 new MenuItemDesignViewModel { DisplayName = "At Bat", FontIcon = "\ue8ec"},
                 new MenuItemDesignViewModel { DisplayName = "Results", FontIcon = "\ue8a9"}
             };
+
+            SaveCommand = new DelegateCommand(OnSave);
+            SyncCommand = new DelegateCommand(OnSync);
         }
         public ICommand SaveCommand { get; }
 
@@ -38,5 +42,9 @@ namespace game_time_uwp.lib.ViewModels.DesignTime
         public string SyncStatusText => SyncSymbol.GetDescriptionFromEnumValue();
 
         public bool IsSaveVisible => true;
+
+        private void OnSave() { }
+
+        private void OnSync() { }
     }
 }

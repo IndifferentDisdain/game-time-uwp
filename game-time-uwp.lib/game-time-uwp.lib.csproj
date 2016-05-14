@@ -115,7 +115,7 @@
     <Compile Include="Sync\SaveStatus.cs" />
     <Compile Include="Sync\SyncStatus.cs" />
     <Compile Include="ViewModels\DesignTime\ListPageDesignViewModel.cs" />
-    <Compile Include="ViewModels\DesignTime\MenuDesignViewModel.cs" />
+    <Compile Include="ViewModels\DesignTime\MenuViewDesignViewModel.cs" />
     <Compile Include="ViewModels\DesignTime\MenuItemDesignViewModel.cs" />
     <Compile Include="ViewModels\IListPageViewModel.cs" />
     <Compile Include="ViewModels\IMenuViewModel.cs" />
